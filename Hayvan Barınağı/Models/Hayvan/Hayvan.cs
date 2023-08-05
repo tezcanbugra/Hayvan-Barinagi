@@ -1,4 +1,5 @@
-﻿namespace Hayvan_Barınağı.Models.Hayvan
+﻿
+namespace Hayvan_Barınağı.Models.Hayvan
 {
     public class Hayvan
     {

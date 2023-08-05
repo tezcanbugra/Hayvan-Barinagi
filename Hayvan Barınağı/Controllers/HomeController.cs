@@ -1,5 +1,8 @@
-﻿using Hayvan_Barınağı.Models;
+﻿using Hayvan_Barınağı.Data;
+using Hayvan_Barınağı.Models;
+using Hayvan_Barınağı.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Hayvan_Barınağı.Controllers
@@ -7,15 +10,24 @@ namespace Hayvan_Barınağı.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private BarinakDbContext _barinakDbContext;
+ 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BarinakDbContext barinakDbContext)
         {
             _logger = logger;
+            _barinakDbContext = barinakDbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var hayvanlar = await _barinakDbContext.Hayvanlar.ToListAsync();
+
+            var model = new HomeViewModel
+            {
+                Hayvanlar = hayvanlar
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()

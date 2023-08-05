@@ -1,8 +1,75 @@
-﻿@{
+﻿@model Hayvan_Barınağı.Models.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                Hayvan Barınağı
+            </h1>
+            <p class="lead">
+                Hayvan Barınağı uygulamasını kullanarak hayvan sahiplenebilir, sahiplenilmesi için ilan oluşturabilirsiniz. 
+            </p>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <img src="https://www.quokkabrew.com/cdn/shop/articles/the-happiest-animal-on-earth-350013_632x.jpg?v=1589229443"
+                 alt="Hayvan Barınağı"
+                 class="d-block mx-lg-auto img-fluid" width="300" />
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            @if (Model != null)
+            {
+                foreach (var hayvan in Model.Hayvanlar)
+                {
+                    <span class="badge bg-dark me-1">
+                        @hayvan.HayvanAdi
+                    </span>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            @if (Model != null && Model.Hayvanlar.Any())
+            {
+                foreach (var hayvan in Model.Hayvanlar)
+                {
+                /*    <div class="mb-5 bg-light box-shadow p-5">
+                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading"
+                     class="mb-2 d-block img-fluid" />
+                */
+                        <h2 class="mb-4">@hayvan.HayvanAdi</h2>
+                        <p class="mb-4">
+                            Eklenme Tarihi: @hayvan.EklenmeTarihi.ToShortDateString()
+                        </p>
+
+                        <p class="mb-4">
+
+                        <span class="badge bg-secondary me-1">@hayvan.Tur</span>
+                        <span class="badge bg-secondary me-1">@hayvan.Cins</span>
+                        <span class="badge bg-secondary me-1">@hayvan.Sahiplenildi</span>
+
+                        </p>
+
+                        <p class="mb-4">@hayvan.Aciklama</p>
+
+                }
+            }
+        </div>
+    </div>
 </div>

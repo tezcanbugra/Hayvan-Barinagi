@@ -1,0 +1,25 @@
+﻿@model Hayvan_Barınağı.Models.ViewModels.TurEkleRequest
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2" >
+    <div class="container">
+        <h1>
+            Yeni Tür Ekle - Admin
+        </h1>
+
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">
+                Tür Adı
+            </label>
+            <input type="text" class="form-control" id="TurAdi" asp-for="TurAdi" />
+        </div>
+
+            <button type="submit" class=" btn btn-dark"> Ekle </button>
+    </form>
+</div>

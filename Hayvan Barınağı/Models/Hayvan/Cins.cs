@@ -8,6 +8,7 @@
         //cinsin ait olduğu tür 
         public virtual Tur? Tur { get; set; }
 
-   
+        public ICollection<Hayvan> Hayvanlar { get; set; }
+
     }
 }

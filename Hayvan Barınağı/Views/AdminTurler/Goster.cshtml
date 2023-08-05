@@ -1,8 +1,7 @@
-﻿@model Hayvan_Barınağı.Models.Hayvan.Tur
+﻿@model List<Hayvan_Barınağı.Models.Hayvan.Tur>
 
 @{
 }
-
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
@@ -11,4 +10,62 @@
         </h1>
 
     </div>
+</div>
+
+
+<div class="container py-5">
+
+    @{
+        if (Model != null && Model.Any())
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Tür Adı</th>
+                        <th scope="col"> </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var Tur in Model)
+                    {
+                        <tr>
+                            <td>@Tur.TurId</td>
+                            <td>@Tur.TurAdi</td>
+
+                            <td>
+                                <a class="btn btn-info"
+                            asp-area=""
+                            asp-controller="AdminTurler"
+                            asp-action="Duzenle"
+                            asp-route-TurId="@Tur.TurId">
+                                    Düzenle
+                                </a>
+                            </td>
+
+
+                            <td>
+                                <a class="btn btn-danger"
+                            asp-area=""
+                            asp-controller="AdminTurler"
+                            asp-action="Sil"
+                            asp-route-TurId="@Tur.TurId">
+                                    Sil
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p> Kayıtlı tür bulunamadı</p>
+        }
+    }
+
 </div>

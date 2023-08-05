@@ -1,43 +1,44 @@
-﻿@model Hayvan_Barınağı.Models.ViewModels.TurDuzenleRequest
+﻿@model Hayvan_Barınağı.Models.ViewModels.CinsDuzenleRequest
+
 @{
 }
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
         <h1>
-            Türleri Düzenle - Admin
+            Cinsleri Düzenle - Admin
         </h1>
 
     </div>
 </div>
 
 <div class="container py-5">
-    @if(Model != null)
+    @if (Model != null)
     {
         <form method="post">
             <div class="mb-3">
 
                 <label class="form-label">
-                    Tür ID
+                    Cins ID
                 </label>
 
-                <input type="text" id="TurId" class="form-control" asp-for="TurId" readonly />
+                <input type="text" id="CinsId" class="form-control" asp-for="CinsId" readonly />
 
             </div>
             <div class="mb-3">
 
                 <label class="form-label">
-                    Tür Adı
+                    Cins Adı
                 </label>
 
-                <input type="text" id="TurAdi" class="form-control" asp-for="TurAdi" />
+                <input type="text" id="CinsAdi" class="form-control" asp-for="CinsAdi" />
             </div>
             <div class="mb-3">
                 <div class=" d-flex">
                     <button type="submit" class="btn btn-dark"> Kaydet</button>
                     <button class="btn btn-danger ms-2" type="submit"
                         asp-area=""
-                        asp-controller="AdminTurler"
+                        asp-controller="AdminCinsler"
                         asp-action="Sil">
                         Sil
                     </button>
@@ -45,8 +46,9 @@
             </div>
         </form>
 
-    } else
+    }
+    else
     {
-        <p> Tür Bulunamadı.</p>
+        <p> Cins Bulunamadı.</p>
     }
 </div>

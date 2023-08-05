@@ -2,7 +2,7 @@
 {
     public class TurDuzenleRequest
     {
-        public int TurId { get; set; }
+        public Guid TurId { get; set; }
         public string TurAdi { get; set; }
     }
 }

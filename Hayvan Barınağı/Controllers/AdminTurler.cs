@@ -2,6 +2,7 @@
 using Hayvan_Barınağı.Models.Hayvan;
 using Hayvan_Barınağı.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hayvan_Barınağı.Controllers
 {
@@ -13,7 +14,6 @@ namespace Hayvan_Barınağı.Controllers
             _barinakDbContext = barinakDbContext;
         }
 
-
         [HttpGet]
         public IActionResult Ekle()
         {
@@ -21,7 +21,7 @@ namespace Hayvan_Barınağı.Controllers
         }
 
         [HttpPost]
-        public IActionResult Ekle(TurEkleRequest RequestModel)
+        public async Task<IActionResult> Ekle(TurEkleRequest RequestModel)
         {
             //Map Request Model to actual Model
             var Tur = new Tur
@@ -30,26 +30,26 @@ namespace Hayvan_Barınağı.Controllers
 
             };
 
-            _barinakDbContext.Turler.Add(Tur);
-            _barinakDbContext.SaveChanges();
+            await _barinakDbContext.Turler.AddAsync(Tur);
+            await _barinakDbContext.SaveChangesAsync();
 
             return RedirectToAction("Goster");
         }
 
         [HttpGet]
         [ActionName("Goster")]
-        public IActionResult Goster()
+        public async Task<IActionResult> Goster()
         {
 
-            var list = _barinakDbContext.Turler.ToList();
+            var list = await _barinakDbContext.Turler.ToListAsync();
 
             return View(list);
         }
 
         [HttpGet]
-        public IActionResult Duzenle(int TurId)
+        public async Task<IActionResult> Duzenle(Guid TurId)
         {
-            var tur = _barinakDbContext.Turler.FirstOrDefault(x => x.TurId == TurId);
+            var tur = await _barinakDbContext.Turler.FirstOrDefaultAsync(x => x.TurId == TurId);
 
             if (tur != null)
             {
@@ -62,13 +62,13 @@ namespace Hayvan_Barınağı.Controllers
                 return View(TurDuzenleRequest);
 
             }
-            else return View(new TurDuzenleRequest { TurId = 3, TurAdi = "a"});
+            
 
             return View(null);
         }
 
         [HttpPost]
-        public IActionResult Duzenle(TurDuzenleRequest RequestModel)
+        public async Task<IActionResult> Duzenle(TurDuzenleRequest RequestModel)
         {
             var TurModel = new Tur
             {
@@ -76,16 +76,44 @@ namespace Hayvan_Barınağı.Controllers
                 TurAdi = RequestModel.TurAdi
             };
 
-            var eskiTur = _barinakDbContext.Turler.Find(TurModel.TurId);
+            var eskiTur = await _barinakDbContext.Turler.FindAsync(TurModel.TurId);
 
             if(eskiTur != null)
             {
                 eskiTur.TurAdi = TurModel.TurAdi;
-                _barinakDbContext.SaveChanges();
+                await _barinakDbContext.SaveChangesAsync();
                 return RedirectToAction("Goster");
             }
 
             return RedirectToAction("Duzenle",new {id = TurModel.TurId});
+        }
+
+        [HttpPost]
+        public IActionResult Sil(TurDuzenleRequest RequestModel)
+        {
+            var Tur = _barinakDbContext.Turler.Find(RequestModel.TurId);
+
+            if(Tur != null)
+            {
+                _barinakDbContext.Turler.Remove(Tur);
+                _barinakDbContext.SaveChanges();
+                return RedirectToAction("Goster");
+            }
+            return RedirectToAction("Duzenle", new { TurId = RequestModel.TurId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Sil(Guid TurId)
+        {
+            var Tur = await _barinakDbContext.Turler.FindAsync(TurId);
+
+            if (Tur != null)
+            {
+                _barinakDbContext.Turler.Remove(Tur);
+                await _barinakDbContext.SaveChangesAsync();
+                return RedirectToAction("Goster");
+            }
+            return RedirectToAction("Duzenle", TurId);
         }
     }
 }

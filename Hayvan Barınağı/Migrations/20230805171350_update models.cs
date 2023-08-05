@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hayvan_Barınağı.Migrations
 {
     /// <inheritdoc />
-    public partial class modelscreate : Migration
+    public partial class updatemodels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace Hayvan_Barınağı.Migrations
                 name: "Turler",
                 columns: table => new
                 {
-                    TurId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TurId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TurAdi = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -28,10 +27,9 @@ namespace Hayvan_Barınağı.Migrations
                 name: "Cinsler",
                 columns: table => new
                 {
-                    CinsId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CinsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CinsAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TurId = table.Column<int>(type: "int", nullable: true)
+                    TurId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,8 +46,8 @@ namespace Hayvan_Barınağı.Migrations
                 columns: table => new
                 {
                     HayvanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CinsId = table.Column<int>(type: "int", nullable: true),
-                    TurId = table.Column<int>(type: "int", nullable: true),
+                    CinsId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TurId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Yas = table.Column<int>(type: "int", nullable: false),
                     Cinsiyet = table.Column<bool>(type: "bit", nullable: false),
                     Sahiplenildi = table.Column<bool>(type: "bit", nullable: false),
@@ -64,14 +62,12 @@ namespace Hayvan_Barınağı.Migrations
                         name: "FK_Hayvanlar_Cinsler_CinsId",
                         column: x => x.CinsId,
                         principalTable: "Cinsler",
-                        principalColumn: "CinsId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "CinsId");
                     table.ForeignKey(
                         name: "FK_Hayvanlar_Turler_TurId",
                         column: x => x.TurId,
                         principalTable: "Turler",
-                        principalColumn: "TurId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "TurId");
                 });
 
             migrationBuilder.CreateIndex(

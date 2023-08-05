@@ -1,0 +1,27 @@
+﻿@model Hayvan_Barınağı.Models.ViewModels.CinsEkleRequest
+
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2" >
+    <div class="container">
+        <h1>
+            Yeni Cins Ekle - Admin
+        </h1>
+
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+
+            <label class="form-label">
+                Cins Adı
+            </label>
+            <input type="text" class="form-control" id="CinsAdi" asp-for="CinsAdi" />
+        </div>
+
+            <button type="submit" class=" btn btn-dark"> Ekle </button>
+    </form>
+</div>

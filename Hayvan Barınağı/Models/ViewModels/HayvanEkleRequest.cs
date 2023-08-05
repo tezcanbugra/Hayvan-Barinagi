@@ -1,17 +1,15 @@
-﻿namespace Hayvan_Barınağı.Models.Hayvan
+﻿using Hayvan_Barınağı.Models.Hayvan;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Hayvan_Barınağı.Models.ViewModels
 {
-    public class Hayvan
+    public class HayvanEkleRequest
     {
-        public Guid HayvanId { get; set; }
 
         public string HayvanAdi { get; set; }
-       
-        //Hayvan cinsi
-        public virtual Cins? Cins { get; set; }
 
-        //Hayvan türü
-        public virtual Tur? Tur { get; set; }
-        
+
+
         public int Yas { get; set; }
         public string Cinsiyet { get; set; }
 
@@ -23,6 +21,11 @@
 
         //opsiyonel açıklama
         public string? Aciklama { get; set; }
+        public IEnumerable<SelectListItem> Turler { get; set; }
+        public IEnumerable<SelectListItem> Cinsler { get; set; }
+
+        public string SecilenTur { get; set; }
+        public string SecilenCins { get; set; }
 
         public DateTime EklenmeTarihi { get; set; }
     }

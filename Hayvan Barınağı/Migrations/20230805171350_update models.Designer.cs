@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hayvan_Barınağı.Migrations
 {
     [DbContext(typeof(BarinakDbContext))]
-    [Migration("20230805104715_models create")]
-    partial class modelscreate
+    [Migration("20230805171350_update models")]
+    partial class updatemodels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,18 +27,16 @@ namespace Hayvan_Barınağı.Migrations
 
             modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Cins", b =>
                 {
-                    b.Property<int>("CinsId")
+                    b.Property<Guid>("CinsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CinsId"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CinsAdi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TurId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("TurId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CinsId");
 
@@ -56,8 +54,8 @@ namespace Hayvan_Barınağı.Migrations
                     b.Property<string>("Aciklama")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CinsId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CinsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Cinsiyet")
                         .HasColumnType("bit");
@@ -71,8 +69,8 @@ namespace Hayvan_Barınağı.Migrations
                     b.Property<bool>("Sahiplenildi")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TurId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("TurId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Yas")
                         .HasColumnType("int");
@@ -88,11 +86,9 @@ namespace Hayvan_Barınağı.Migrations
 
             modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Tur", b =>
                 {
-                    b.Property<int>("TurId")
+                    b.Property<Guid>("TurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TurId"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TurAdi")
                         .IsRequired()
@@ -106,7 +102,7 @@ namespace Hayvan_Barınağı.Migrations
             modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Cins", b =>
                 {
                     b.HasOne("Hayvan_Barınağı.Models.Hayvan.Tur", "Tur")
-                        .WithMany()
+                        .WithMany("Cinsler")
                         .HasForeignKey("TurId");
 
                     b.Navigation("Tur");
@@ -115,16 +111,28 @@ namespace Hayvan_Barınağı.Migrations
             modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Hayvan", b =>
                 {
                     b.HasOne("Hayvan_Barınağı.Models.Hayvan.Cins", "Cins")
-                        .WithMany()
+                        .WithMany("Hayvanlar")
                         .HasForeignKey("CinsId");
 
                     b.HasOne("Hayvan_Barınağı.Models.Hayvan.Tur", "Tur")
-                        .WithMany()
+                        .WithMany("Hayvanlar")
                         .HasForeignKey("TurId");
 
                     b.Navigation("Cins");
 
                     b.Navigation("Tur");
+                });
+
+            modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Cins", b =>
+                {
+                    b.Navigation("Hayvanlar");
+                });
+
+            modelBuilder.Entity("Hayvan_Barınağı.Models.Hayvan.Tur", b =>
+                {
+                    b.Navigation("Cinsler");
+
+                    b.Navigation("Hayvanlar");
                 });
 #pragma warning restore 612, 618
         }

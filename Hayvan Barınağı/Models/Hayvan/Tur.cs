@@ -2,7 +2,7 @@
 {
     public class Tur
     {
-        public int TurId { get; set; }
+        public Guid TurId { get; set; }
         public string TurAdi { get; set; }
 
         public ICollection<Cins> Cinsler { get; set; }

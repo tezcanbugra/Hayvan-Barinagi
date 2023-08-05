@@ -1,8 +1,12 @@
+using Hayvan_Barýnaðý.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+IServiceCollection serviceCollection = builder.Services.AddDbContext<BarinakDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("HayvanBarinagiConnectionString")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -11,7 +11,7 @@
                 Hayvan Barınağı
             </h1>
             <p class="lead">
-                Hayvan Barınağı uygulamasını kullanarak hayvan sahiplenebilir, sahiplenilmesi için ilan oluşturabilirsiniz. 
+                Hayvan Barınağı uygulamasını kullanarak hayvan sahiplenebilir, sahiplenilmesi için ilan oluşturabilirsiniz.
             </p>
         </div>
 
@@ -26,17 +26,29 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-6 d-flex">
-            @if (Model != null)
+        @if (Model != null && Model.Hayvanlar.Any())
+        {
+
+            foreach (var hayvan in Model.Hayvanlar)
             {
-                foreach (var hayvan in Model.Hayvanlar)
-                {
-                    <span class="badge bg-dark me-1">
-                        @hayvan.HayvanAdi
-                    </span>
-                }
+           
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src=@hayvan.fotografURL alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@hayvan.HayvanAdi</h5>
+                        <p class="card-text">@hayvan.Aciklama</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Türü:</b>@hayvan.TurAdi</li>
+                        <li class="list-group-item"><b>Cinsi:</b>@hayvan.CinsAdi</li>
+                        <li class="list-group-item"><b>Sahiplenildi mi:</b> @if(@hayvan.Sahiplenildi){<p>Evet</p>} else {<p>Hayır</p>}</li>
+                    </ul>
+                 
+                </div>
             }
-        </div>
+            
+
+        }
     </div>
 
 </div>
@@ -45,31 +57,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            @if (Model != null && Model.Hayvanlar.Any())
-            {
-                foreach (var hayvan in Model.Hayvanlar)
-                {
-                /*    <div class="mb-5 bg-light box-shadow p-5">
-                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading"
-                     class="mb-2 d-block img-fluid" />
-                */
-                        <h2 class="mb-4">@hayvan.HayvanAdi</h2>
-                        <p class="mb-4">
-                            Eklenme Tarihi: @hayvan.EklenmeTarihi.ToShortDateString()
-                        </p>
-
-                        <p class="mb-4">
-
-                        <span class="badge bg-secondary me-1">@hayvan.Tur</span>
-                        <span class="badge bg-secondary me-1">@hayvan.Cins</span>
-                        <span class="badge bg-secondary me-1">@hayvan.Sahiplenildi</span>
-
-                        </p>
-
-                        <p class="mb-4">@hayvan.Aciklama</p>
-
-                }
-            }
         </div>
     </div>
 </div>

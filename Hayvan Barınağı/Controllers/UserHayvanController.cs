@@ -51,7 +51,9 @@ namespace Hayvan_Barınağı.Controllers
                 Aciklama = RequestModel.Aciklama,
                 EklenmeTarihi = currentDateTime,
                 Cins = await _barinakDbContext.Cinsler.FindAsync(new Guid(RequestModel.SecilenCins)),
-                Tur = await _barinakDbContext.Turler.FindAsync(new Guid(RequestModel.SecilenTur))
+                Tur = await _barinakDbContext.Turler.FindAsync(new Guid(RequestModel.SecilenTur)),
+                fotografURL = RequestModel.fotografURL
+
             };
 
             await _barinakDbContext.Hayvanlar.AddAsync(hayvan);

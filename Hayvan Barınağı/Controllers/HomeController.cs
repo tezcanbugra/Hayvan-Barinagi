@@ -22,6 +22,7 @@ namespace Hayvan_Barınağı.Controllers
         public async Task<IActionResult> Index()
         {
             var hayvanlar = await _barinakDbContext.Hayvanlar.ToListAsync();
+            
 
             var model = new HomeViewModel
             {

@@ -28,5 +28,6 @@ namespace Hayvan_Barınağı.Models.ViewModels
         public string SecilenCins { get; set; }
 
         public DateTime EklenmeTarihi { get; set; }
+        public string? fotografURL { get; set; }
     }
 }

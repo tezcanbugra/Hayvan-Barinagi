@@ -4,6 +4,7 @@ using Hayvan_Barınağı.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hayvan_Barınağı.Migrations
 {
     [DbContext(typeof(BarinakDbContext))]
-    partial class BarinakDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806103430_hayvan model update name Id")]
+    partial class hayvanmodelupdatenameId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

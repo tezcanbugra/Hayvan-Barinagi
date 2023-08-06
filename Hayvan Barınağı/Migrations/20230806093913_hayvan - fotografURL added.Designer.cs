@@ -4,6 +4,7 @@ using Hayvan_Barınağı.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hayvan_Barınağı.Migrations
 {
     [DbContext(typeof(BarinakDbContext))]
-    partial class BarinakDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806093913_hayvan - fotografURL added")]
+    partial class hayvanfotografURLadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,11 +54,7 @@ namespace Hayvan_Barınağı.Migrations
                     b.Property<string>("Aciklama")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CinsAdi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("CinsId")
+                    b.Property<Guid?>("CinsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cinsiyet")
@@ -75,11 +74,7 @@ namespace Hayvan_Barınağı.Migrations
                     b.Property<bool>("Sahiplenildi")
                         .HasColumnType("bit");
 
-                    b.Property<string>("TurAdi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TurId")
+                    b.Property<Guid?>("TurId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Yas")
@@ -125,15 +120,11 @@ namespace Hayvan_Barınağı.Migrations
                 {
                     b.HasOne("Hayvan_Barınağı.Models.Hayvan.Cins", "Cins")
                         .WithMany("Hayvanlar")
-                        .HasForeignKey("CinsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CinsId");
 
                     b.HasOne("Hayvan_Barınağı.Models.Hayvan.Tur", "Tur")
                         .WithMany("Hayvanlar")
-                        .HasForeignKey("TurId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TurId");
 
                     b.Navigation("Cins");
 

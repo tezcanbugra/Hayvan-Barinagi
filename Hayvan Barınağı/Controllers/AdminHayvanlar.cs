@@ -2,6 +2,7 @@
 using Hayvan_Barınağı.Models.Hayvan;
 using Hayvan_Barınağı.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -50,8 +51,16 @@ namespace Hayvan_Barınağı.Controllers
                 Aciklama = RequestModel.Aciklama,
                 EklenmeTarihi = currentDateTime,
                 Cins = await _barinakDbContext.Cinsler.FindAsync(new Guid(RequestModel.SecilenCins)),
-                Tur = await _barinakDbContext.Turler.FindAsync(new Guid(RequestModel.SecilenTur))
+                Tur = await _barinakDbContext.Turler.FindAsync(new Guid(RequestModel.SecilenTur)),
+                fotografURL = RequestModel.fotografURL
             };
+
+            var tmpCins = await _barinakDbContext.Cinsler.FindAsync(new Guid(RequestModel.SecilenCins));
+            hayvan.CinsAdi = tmpCins.CinsAdi;
+
+            var tmpTur = await _barinakDbContext.Turler.FindAsync(new Guid(RequestModel.SecilenTur));
+            hayvan.TurAdi = tmpTur.TurAdi;
+
 
             await _barinakDbContext.Hayvanlar.AddAsync(hayvan);
             await _barinakDbContext.SaveChangesAsync();

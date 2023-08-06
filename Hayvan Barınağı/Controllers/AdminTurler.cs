@@ -1,11 +1,14 @@
 ﻿using Hayvan_Barınağı.Data;
 using Hayvan_Barınağı.Models.Hayvan;
 using Hayvan_Barınağı.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hayvan_Barınağı.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class AdminTurler : Controller
     {
         private BarinakDbContext _barinakDbContext;

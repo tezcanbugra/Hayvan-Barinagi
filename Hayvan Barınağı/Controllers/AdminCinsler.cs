@@ -1,12 +1,16 @@
 ﻿using Hayvan_Barınağı.Data;
 using Hayvan_Barınağı.Models.Hayvan;
 using Hayvan_Barınağı.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Hayvan_Barınağı.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class AdminCinsler : Controller
     {
 

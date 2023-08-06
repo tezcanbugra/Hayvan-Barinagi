@@ -1,0 +1,49 @@
+﻿@model List<Hayvan_Barınağı.Models.Hayvan.Hayvan>
+
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>
+            Hayvanları Göster - Kullanıcı
+        </h1>
+
+    </div>
+</div>
+
+
+<div class="container py-5">
+
+    @{
+        if (Model != null && Model.Any())
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Hayvan Adı</th>
+                        <th scope="col"> </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var Hayvan in Model)
+                    {
+                        <tr>
+                            <td>@Hayvan.HayvanId</td>
+                            <td>@Hayvan.HayvanAdi</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p> Kayıtlı Hayvan bulunamadı</p>
+        }
+    }
+
+</div>

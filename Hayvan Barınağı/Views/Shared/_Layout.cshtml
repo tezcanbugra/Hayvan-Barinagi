@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hayvan_Barınağı</title>
+    <title>@ViewData["Title"] - Hayvan Barınağı</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Hayvan_Barınağı.styles.css" asp-append-version="true" />
@@ -30,7 +30,7 @@
                         {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
+                                Admin Paneli
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -72,6 +72,26 @@
                             </ul>
 
                         </li>
+                        }
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Kullanıcı Paneli
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item"
+                                   asp-area=""
+                                   asp-controller="UserHayvan"
+                                   asp-action="Goster">Hayvanları Göster</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                   asp-area=""
+                                   asp-controller="UserHayvan"
+                                   asp-action="Ekle">Hayvan Ekle</a>
+                                </li>
+                            </ul>
                         }
 
                     </ul>

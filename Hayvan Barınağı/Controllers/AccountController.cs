@@ -21,32 +21,37 @@ namespace Hayvan_Barınağı.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            var identityUser = new IdentityUser
+            if (ModelState.IsValid)
             {
-                UserName = registerViewModel.Email,
-                Email = registerViewModel.Email,
-
-            };
-            var identityResult = await userManager.CreateAsync(identityUser,registerViewModel.Password);
-
-            if (identityResult.Succeeded)
-            {
-                //assign a role
-                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
-
-                if (roleIdentityResult.Succeeded)
+                var identityUser = new IdentityUser
                 {
-                    return RedirectToAction("Register");
-                }
+                    UserName = registerViewModel.Email,
+                    Email = registerViewModel.Email,
 
+                };
+                var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
+
+                if (identityResult.Succeeded)
+                {
+                    //assign a role
+                    var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+
+                    if (roleIdentityResult.Succeeded)
+                    {
+                        return RedirectToAction("Register");
+                    }
+
+                }
             }
             return View();
+
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            var model = new LoginViewModel { ReturnUrl = ReturnUrl };
+            return View(model);
         }
 
         [HttpPost]
@@ -56,6 +61,10 @@ namespace Hayvan_Barınağı.Controllers
 
             if(signInResult != null && signInResult.Succeeded)
             {
+                if (string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
+                {
+                    return RedirectToPage(loginViewModel.ReturnUrl);
+                }
                 return RedirectToAction("Index", "Home");
             }
 

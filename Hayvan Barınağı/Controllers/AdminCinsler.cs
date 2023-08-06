@@ -69,5 +69,17 @@ namespace Hayvan_Barınağı.Controllers
 
             return View(null);
         }
+        public async Task<IActionResult> Sil(Guid CinsId)
+        {
+            var cins = await _barinakDbContext.Cinsler.FindAsync(CinsId);
+
+            if (cins != null)
+            {
+                _barinakDbContext.Cinsler.Remove(cins);
+                await _barinakDbContext.SaveChangesAsync();
+                return RedirectToAction("Goster");
+            }
+            return RedirectToAction("Duzenle", CinsId);
+        }
     }
 }

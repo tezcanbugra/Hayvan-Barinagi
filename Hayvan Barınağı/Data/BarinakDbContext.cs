@@ -7,7 +7,7 @@ namespace Hayvan_Barınağı.Data
     public class BarinakDbContext : DbContext
     {
 
-        public BarinakDbContext(DbContextOptions options) : base(options) { }
+        public BarinakDbContext(DbContextOptions<BarinakDbContext> options) : base(options) { }
         public DbSet<Hayvan> Hayvanlar { get; set; }
         public DbSet<Tur> Turler { get; set; }
 

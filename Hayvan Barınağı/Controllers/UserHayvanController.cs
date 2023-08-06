@@ -71,5 +71,25 @@ namespace Hayvan_Barınağı.Controllers
 
             return View(list);
         }
+
+        [HttpGet]
+        [ActionName("Sahiplen")]
+
+        public async Task<IActionResult> Sahiplen(Guid HayvanId)
+        {
+
+            var eskiHayvan = await _barinakDbContext.Hayvanlar.FindAsync(HayvanId);
+
+            if (eskiHayvan != null)
+            {
+                eskiHayvan.SahiplenmeDurumu = 1;
+                await _barinakDbContext.SaveChangesAsync();
+                return RedirectToAction("Goster");
+
+            }
+
+            return RedirectToAction("Goster");
+
+        }
     }
 }

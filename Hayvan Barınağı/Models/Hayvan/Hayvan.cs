@@ -23,6 +23,8 @@ namespace Hayvan_Barınağı.Models.Hayvan
         //Hayvan sahiplenildi mi
         public bool Sahiplenildi { get; set; }
 
+        //0 istek yok, 1 bekleyen istek var. 
+        public int SahiplenmeDurumu { get; set; }   
         //admin onayı
         public bool Onay { get; set; }
 

@@ -157,6 +157,18 @@ namespace Hayvan_Barınağı.Controllers
             }
             return RedirectToAction("Duzenle", HayvanId);
         }
+
+        public async Task<IActionResult> SahiplenmeOnay(Guid HayvanId)
+        {
+            var hayvan = await _barinakDbContext.Hayvanlar.FindAsync(HayvanId);
+            if (hayvan != null)
+            {
+                hayvan.Sahiplenildi = true;
+                await _barinakDbContext.SaveChangesAsync();
+                return RedirectToAction("Goster");
+            }
+            return RedirectToAction("Goster");
+        }
     }
 }
 

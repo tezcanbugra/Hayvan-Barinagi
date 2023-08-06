@@ -25,6 +25,8 @@
                         <th scope="col">Hayvan Adı</th>
                         <th scope="col"> Hayvan Türü</th>
                         <th scope="col"> Hayvan Cinsi</th>
+                        <th scope="col"> Sahiplenme İsteği</th>
+                        <th scope="col"> Onay </th>
 
                         <th scope="col"> </th>
 
@@ -40,6 +42,38 @@
                             <td>@Hayvan.HayvanAdi</td>
                             <td>@Hayvan.Tur</td>
                             <td>@Hayvan.Cins</td>
+                            <td>
+                                @if (Hayvan.SahiplenmeDurumu == 1)
+                                {
+                                    <p>Var</p>
+                                }
+                                else
+                                {
+                                    <p>Yok</p>
+                                }
+
+
+                            </td>
+                           
+                            <td>@if (Hayvan.Sahiplenildi)
+                                {
+                                    <p> Hayvan Sahiplenildi</p>
+                                } else if(Hayvan.SahiplenmeDurumu == 1)
+                                {
+                                    <a class="btn btn-success"
+                                       asp-area=""
+                                       asp-controller="AdminHayvanlar"
+                                       asp-action="SahiplenmeOnay"
+                                       asp-route-HayvanId="@Hayvan.HayvanId">
+                                        Onayla
+                                    </a>
+                                } else
+                                {
+                                    <p> Sahiplenme isteği yok. </p>
+                                }
+
+                            </td>
+
 
                             <td>
                                 <a class="btn btn-info"

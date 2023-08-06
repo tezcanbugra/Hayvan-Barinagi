@@ -22,7 +22,12 @@
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
+                        <th scope="col">Hayvan Türü</th>
+                        <th scope="col">Hayvan Cinsi</th>
                         <th scope="col">Hayvan Adı</th>
+                        <th scope="col">Hayvan Yaşı</th>
+                        <th scope="col">Sahiplenildi mi?</th>
+
                         <th scope="col"> </th>
 
                     </tr>
@@ -33,7 +38,18 @@
                     {
                         <tr>
                             <td>@Hayvan.HayvanId</td>
+                            <td>@Hayvan.TurAdi</td>
+                            <td>@Hayvan.CinsAdi</td>
                             <td>@Hayvan.HayvanAdi</td>
+                            <td>@Hayvan.Yas</td>
+                            <td>@if (@Hayvan.Sahiplenildi)
+                                {
+                                    <p>Evet</p>
+                                }
+                                else
+                                {
+                                    <p>Hayır</p>
+                                }</td>
 
                         </tr>
                     }

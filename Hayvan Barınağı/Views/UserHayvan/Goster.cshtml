@@ -22,7 +22,13 @@
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
+                        <th scope="col">Hayvan Türü</th>
+                        <th scope="col">Hayvan Cinsi</th>
                         <th scope="col">Hayvan Adı</th>
+                        <th scope="col">Hayvan Yaşı</th>
+                        <th scope="col">Sahiplenildi mi?</th>
+                        <th scope="col"> Sahiplen </th>
+
                         <th scope="col"> </th>
 
                     </tr>
@@ -33,8 +39,34 @@
                     {
                         <tr>
                             <td>@Hayvan.HayvanId</td>
+                            <td>@Hayvan.TurAdi</td>
+                            <td>@Hayvan.CinsAdi</td>
                             <td>@Hayvan.HayvanAdi</td>
-
+                            <td>@Hayvan.Yas</td>
+                            <td>
+                                @if (@Hayvan.Sahiplenildi)
+                                {
+                                    <p>Evet</p>
+                                }
+                                else
+                                {
+                                    <p>Hayır</p>
+                                }
+                            </td>
+                            <td>
+                                @if (Hayvan.SahiplenmeDurumu != 1)
+                                {
+                                    <a class="btn btn-info"
+                                       asp-area=""
+                                       asp-controller="UserHayvan"
+                                       asp-action="Sahiplen"
+                                       asp-route-HayvanId="@Hayvan.HayvanId">
+                                       Sahiplen
+                                    </a>} else 
+                                    {
+                                        <p> Aktif Sahiplenme İsteği Var.</p>
+                                    }
+                                    </td>
                         </tr>
                     }
                 </tbody>

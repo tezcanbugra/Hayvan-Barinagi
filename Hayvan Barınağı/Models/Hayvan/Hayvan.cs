@@ -9,13 +9,13 @@ namespace Hayvan_Barınağı.Models.Hayvan
        
         //Hayvan cinsi
         public virtual Cins? Cins { get; set; }
-        public Guid  CinsId { get; set; }
-        public string CinsAdi { get; set; }
+        public Guid?  CinsId { get; set; }
+        public string? CinsAdi { get; set; }
 
         //Hayvan türü
         public virtual Tur? Tur { get; set; }
-        public Guid TurId { get; set; }
-        public string TurAdi { get; set; }
+        public Guid? TurId { get; set; }
+        public string? TurAdi { get; set; }
 
         public int Yas { get; set; }
         public string Cinsiyet { get; set; }
